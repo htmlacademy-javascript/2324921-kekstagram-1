@@ -1,4 +1,4 @@
-// // Пример
+// // // Пример
 // // Строка является палиндромом
 // имяФункции('топот'); // true
 // // Несмотря на разный регистр, тоже палиндром
@@ -7,44 +7,102 @@
 // имяФункции('Кекс');  // false
 
 
-// let calculateSum = function (numberFirst, numberSecond) {
-//   let sum = numberFirst + numberSecond;
-//   return sum;
-// };
+//                     ====== Полиндром =======
 
-// calculateSum(); // Вернёт NaN
-// calculateSum(2); // Вернёт NaN
-// calculateSum(2, 5); // Вернёт 7
-// calculateSum(9, 5); // Вернёт 14
-
-
-// ДЗ
-palindrome('34543') === true
-palindrome('1345431') === true
-palindrome('787') === true
-palindrome('56725') === false
-
-let palindrome = function (str) {
-  let result = str;
-  return true;
+// //1-й Вариант.
+    const isPalindrome = (string) => {
+  const tempString = string
+        .toLowerCase()
+        // .toUpperCase()
+        // .replaceAll('', ' ');
+  let reverseString = '';
+  for (let i = tempString.length - 1; i >= 0; i--) {
+    reverseString += tempString.at(i);
+  }
+  console.log(reverseString);
+  return reverseString === tempString;
 }
 
-console.log(palindrome('34543'));
-palindrome('34543');
+console.log(isPalindrome('Довд'));
 
+// isPalindrome('КоМк')
 
-
-// function palindrome(str) {
-//   let check = '';
-//   for (let i = str.length; i > 0; --i) {
-//     check += str[i];
-//   }
-//   if (str == check) {
-//     return true;
-//   } else {
-//     return false;
-//   }
+// 2-й Вариант. (Не совсем рабочий =))
+//  const isPalindrome = (string) => {
+//     const tempString = string
+//       .toLowerCase()
+//       .toUpperCase()
+//       .replaceAll(' ', '');
+//       console.log(tempString);
+//       return tempString === tempString.split('').join('');
 // }
 
-// console.log(palindrome('34543'));
 
+// ============   Функция для проверки длины строки    ==============
+
+// Cтрока короче 20 символов
+// имяФункции('проверяемая строка', 20); // true
+// Длина строки ровно 18 символов
+// имяФункции('проверяемая строка', 18); // true
+// Строка длиннее 10 символов
+// имяФункции('проверяемая строка', 10); // false
+
+
+// 1-й Враиант.
+const isLessOrEqual = (string, length) => {
+  if (string.length <= length) {
+    return true;
+  }
+    return false
+};
+
+console.log (isLessOrEqual('проверяемая строка', 18));
+
+
+// console.log(isLessOrEqual);
+// isLessOrEqual('проверяемая строка', 10);
+
+// 2-й Вариант.
+// const isLessOrEqual = (string, length) => {
+//     return string.length <= length;
+// }
+// console.log(isLessOrEqual);
+// isLessOrEqual('проверяемая строка', 18);
+
+
+// ===============  Функция, которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9    ===============
+//  и возвращает их в виде целого положительного числа. Если в строке нет ни одной цифры, функция должна вернуть NaN:
+
+// имяФункции('2023 год');            // 2023
+// имяФункции('ECMAScript 2022');     // 2022
+// имяФункции('1 кефир, 0.5 батона'); // 105
+// имяФункции('агент 007');           // 7
+// имяФункции('а я томат');           // NaN
+
+
+// 1-й Вариант.
+// const extractNumber = (string) => {
+//   if (typeof string === 'number') {
+//       return string;
+//   }
+//   let result = '';
+//   for (let i = 0; i < string.length; i++) {
+//       if (!Number.isNaN(parseInt(string.at(i), 10))) {
+//         result += string.at(i)
+//       }
+//   }
+//   return parseInt(result, 10);
+// }
+// console.log(extractNumber ('ECMAScript 2022'));
+
+// 2-й Вариант.
+const extractNumber = (string) => {
+  let result = '';
+  for (let i = 0; i < string.length; i++) {
+      if (!Number.isNaN(parseInt(string.at(i), 10))) {
+        result += string.at(i)
+      }
+  }
+  return parseInt(result, 10);
+}
+console.log(extractNumber ('1 кефир, 0.5 батона'));
