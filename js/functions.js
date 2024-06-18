@@ -9,34 +9,34 @@
 
 //                     ====== Полиндром =======
 
-// //1-й Вариант.
-    const isPalindrome = (string) => {
-  const tempString = string
-        .toLowerCase()
-        // .toUpperCase()
-        // .replaceAll('', ' ');
-  let reverseString = '';
-  for (let i = tempString.length - 1; i >= 0; i--) {
-    reverseString += tempString.at(i);
-  }
-  console.log(reverseString);
-  return reverseString === tempString;
-}
+// //   -- 1-й Вариант. --
+// const isPalindrome = (string) => {
+//   const tempString = string
+//     .toLowerCase()
+//     .toUpperCase()
+//     .replaceAll('', ' ');
+//   let reverseString = '';
+//   for (let i = tempString.length - 1; i >= 0; i--) {
+//     reverseString += tempString.at(i);
+//   }
+//   return reverseString === tempString;
+// };
 
-console.log(isPalindrome('Довд'));
+// console.log(isPalindrome('Довд'));
 
 // isPalindrome('КоМк')
 
-// 2-й Вариант. (Не совсем рабочий =))
-//  const isPalindrome = (string) => {
-//     const tempString = string
-//       .toLowerCase()
-//       .toUpperCase()
-//       .replaceAll(' ', '');
-//       console.log(tempString);
-//       return tempString === tempString.split('').join('');
-// }
+// -- 2-й Вариант. --
+const isPalindrome = (string) => {
+  const tempString = string
+    .toLowerCase()
+    .toUpperCase()
+    .replaceAll(' ', '');
+  const reverseString = tempString.split('').reverse().join('');
+  return reverseString === tempString;
+};
 
+isPalindrome('КоМк');
 
 // ============   Функция для проверки длины строки    ==============
 
@@ -48,26 +48,29 @@ console.log(isPalindrome('Довд'));
 // имяФункции('проверяемая строка', 10); // false
 
 
-// 1-й Враиант.
-const isLessOrEqual = (string, length) => {
-  if (string.length <= length) {
-    return true;
-  }
-    return false
-};
+// // -- 1-й Враиант. --
+// const isLessOrEqual = (string, length) => {
+//   if (string.length <= length) {
+//     return true;
+//   }
+//   return false;
+// };
 
-console.log (isLessOrEqual('проверяемая строка', 18));
+// isLessOrEqual('проверяемая строка', 18);
 
 
 // console.log(isLessOrEqual);
 // isLessOrEqual('проверяемая строка', 10);
 
-// 2-й Вариант.
-// const isLessOrEqual = (string, length) => {
+// -- 2-й Вариант. --
+// const checkStringLength = (string, length) => {
 //     return string.length <= length;
 // }
-// console.log(isLessOrEqual);
-// isLessOrEqual('проверяемая строка', 18);
+// checkStringLength('проверяемая строка', 18);
+
+//  -- 3-й Вариант (Самый локаничный и читаемый) --
+const checkStringLength = (string, length) => string.length <= length;
+checkStringLength('проверяемая строка', 18);
 
 
 // ===============  Функция, которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9    ===============
@@ -80,7 +83,7 @@ console.log (isLessOrEqual('проверяемая строка', 18));
 // имяФункции('а я томат');           // NaN
 
 
-// 1-й Вариант.
+// -- 1-й Вариант. --
 // const extractNumber = (string) => {
 //   if (typeof string === 'number') {
 //       return string;
@@ -95,14 +98,22 @@ console.log (isLessOrEqual('проверяемая строка', 18));
 // }
 // console.log(extractNumber ('ECMAScript 2022'));
 
-// 2-й Вариант.
+//  -- 2-й Вариант. --
+// const extractNumber = (string) => {
+//   let result = '';
+//   for (let i = 0; i < string.length; i++) {
+//     if (!Number.isNaN(parseInt(string.at(i), 10))) {
+//       result += string.at(i);
+//     }
+//   }
+//   return parseInt(result, 10);
+// };
+// extractNumber('1 кефир, 0.5 батона');
+
+// -- 3-й Вариант --
 const extractNumber = (string) => {
-  let result = '';
-  for (let i = 0; i < string.length; i++) {
-      if (!Number.isNaN(parseInt(string.at(i), 10))) {
-        result += string.at(i)
-      }
-  }
-  return parseInt(result, 10);
-}
-console.log(extractNumber ('1 кефир, 0.5 батона'));
+  const digits = string.match(/\d+/g);
+  return digits ? parseInt(digits.join(''), 10) : NaN;
+};
+
+extractNumber('1 кефир, 0.5 батона');
