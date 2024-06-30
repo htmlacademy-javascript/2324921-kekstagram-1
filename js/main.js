@@ -1,5 +1,3 @@
-const { name } = require("browser-sync");
-
 const NAMES = [
   'Иван',
   'Дмитрий',
@@ -24,10 +22,10 @@ const COMMENTS__STROKES = [
 ];
 
 const DESCRIPTIONS = [
-'Наконец-то мы на каникулах. Урааа!',
-'Хочется отдохнуть и отвлечься от всех дел и суеты',
-'Фотограф у нас так себе, хотя у него профессиональный фотик',
-'Поиск хорошего фотографа нужен как можно быстрее, иначе мы останемся без красивых фоток и памяти',
+  'Наконец-то мы на каникулах. Урааа!',
+  'Хочется отдохнуть и отвлечься от всех дел и суеты',
+  'Фотограф у нас так себе, хотя у него профессиональный фотик',
+  'Поиск хорошего фотографа нужен как можно быстрее, иначе мы останемся без красивых фоток и памяти',
 ];
 
 
@@ -55,29 +53,29 @@ const generateCommentId = createIdGenerator();
 const createMessage = () =>
   Array.from({ length: getRandomInteger(1, 2) }, () =>
     getRandomArrayElements(COMMENTS__STROKES)
-  ).join(' ')
+  ).join(' ');
 
 const createComment = () => ({
-  id: generateCommentId (),
+  id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(1, AVATAR__COUNT)}.svg`,
-  message: createMessage (),
+  message: createMessage(),
   name: getRandomArrayElements(NAMES),
-  });
+});
 
-  const createPicture = (index) => ({
-    id: index,
-    url: `photos/${index}.jpg`,
-    description: getRandomArrayElements(DESCRIPTIONS),
-    likes: getRandomInteger(LIKE__MIN__COUNT, LIKE__MAX__COUNT),
-    comment: Array.from(
-      { length: getRandomInteger(0, COMMENT__COUNT) },
+const createPicture = (index) => ({
+  id: index,
+  url: `photos/${index}.jpg`,
+  description: getRandomArrayElements(DESCRIPTIONS),
+  likes: getRandomInteger(LIKE__MIN__COUNT, LIKE__MAX__COUNT),
+  comment: Array.from(
+    { length: getRandomInteger(0, COMMENT__COUNT) },
     createComment
-    ),
-  });
+  ),
+});
 
 const getPictures = () =>
   Array.from({ length: PICTURE__COUNT }, (_, pictureIndex) =>
-  createPicture (pictureIndex + 1)
+    createPicture(pictureIndex + 1)
   );
 
 getPictures();
