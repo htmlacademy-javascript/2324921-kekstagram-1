@@ -4,7 +4,7 @@ const NAMES = [
   'Мария',
   'Денис',
   'Виктор',
-  'Юлия',
+  'Юлия'
 ];
 
 const PICTURE__COUNT = 25;
@@ -29,7 +29,7 @@ const DESCRIPTIONS = [
 ];
 
 
-// Функция вернет число индексов из диапозона
+// Функция вернет число индексов из заданного диапозона
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -37,6 +37,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
+// Возвращает случайный элемент из массива
 const getRandomArrayElements = (array) => array[getRandomInteger(0, array.length - 1)];
 
 const createIdGenerator = () => {
