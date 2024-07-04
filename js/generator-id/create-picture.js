@@ -1,3 +1,8 @@
+import {DESCRIPTIONS, LIKE_MIN_COUNT, LIKE_MAX_COUNT, COMMENT_COUNT, PICTURE_COUNT} from './data.js';
+import {getRandomInteger, getRandomArrayElements} from './util.js';
+import {createComment} from './generator-id/comment-message.js';
+
+
 const createPicture = (index) => ({
   id: index,
   url: `photos/${index}.jpg`,
@@ -14,6 +19,6 @@ const getPictures = () =>
     createPicture(pictureIndex + 1)
   );
 
-  getPictures();  // Этот вызов уместно так оставлять в этом модуле или же есть другой способ?
+getPictures();// Этот вызов уместно так оставлять в этом модуле или же есть другой способ?
 
-  export { createPicture, getPictures};
+export { createPicture, getPictures };

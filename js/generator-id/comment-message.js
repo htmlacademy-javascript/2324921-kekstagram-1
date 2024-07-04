@@ -1,3 +1,7 @@
+import {NAMES, AVATAR_COUNT, COMMENTS_STROKES} from './data.js';
+import {getRandomInteger, getRandomArrayElements} from './util.js';
+import {generateCommentId} from './generator-id/create-generator-index.js';
+
 const createMessage = () =>
   Array.from({ length: getRandomInteger(1, 2) }, () =>
     getRandomArrayElements(COMMENTS_STROKES)
