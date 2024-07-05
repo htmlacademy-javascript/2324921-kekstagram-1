@@ -1,6 +1,3 @@
-import { getRandomArrayElement } from './util.js';
-getRandomArrayElement();
-
 const NAMES = [
   'Иван',
   'Дмитрий',
@@ -14,7 +11,7 @@ const PICTURE_COUNT = 25;
 const AVATAR_COUNT = 6;
 const LIKE_MIN_COUNT = 15;
 const LIKE_MAX_COUNT = 200;
-const COMMENT_COUNT = 20; // Не совсем понятно откуда взяли это кол-во чисел
+const COMMENT_COUNT = 20;
 const COMMENTS_STROKES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
