@@ -1,4 +1,4 @@
-import { getRandomArrayElements, getRandomInteger } from './util.js';
+import { getRandomArrayElements, getRandomInteger } from '../util.js';
 import { DESCRIPTIONS, LIKE_MIN_COUNT, LIKE_MAX_COUNT, COMMENT_COUNT, PICTURE_COUNT } from './const.js';
 import { createComment } from './comment.js';
 

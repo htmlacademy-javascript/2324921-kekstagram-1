@@ -1,4 +1,4 @@
-import { getRandomArrayElements, getRandomInteger } from './util.js';
+import { getRandomArrayElements, getRandomInteger } from '../util.js';
 import { COMMENTS_STROKES, AVATAR_COUNT, NAMES } from './const.js';
 
 const createIdGenerator = () => {
