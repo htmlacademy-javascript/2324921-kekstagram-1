@@ -1,3 +1,4 @@
 import { getPictures } from './mocks/photo.js';
+import { renderThumbnails } from './thumbnail.js';
 
-getPictures();
+renderThumbnails(getPictures());
