@@ -8,4 +8,7 @@ const getRandomInteger = (a, b) => {
 // Возвращает случайный элемент из массива
 const getRandomArrayElements = (array) => array[getRandomInteger(0, array.length - 1)];
 
-export { getRandomInteger, getRandomArrayElements };
+//Закрывает модальное окно при нажатии на клавишу "Esc"
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export { getRandomInteger, getRandomArrayElements, isEscapeKey };
