@@ -1,5 +1,5 @@
-import { renderThumbnails } from "./thumbnail";
-import {showBigPicture} from "./big-picture.js"
+import { renderThumbnails } from './thumbnail';
+import {showBigPicture} from './big-picture.js';
 
 const container = document.querySelector('.pictures');
 
@@ -8,7 +8,7 @@ const renderGallery = (pictures) => {
     const thumbnail = evt.target.closest('[data-thumbnail-id]');
     if (!thumbnail) {
       return;
-    };
+    }
 
     const picture = pictures.find(
       (item) => item.id === +thumbnail.dataset.thumbnailId
