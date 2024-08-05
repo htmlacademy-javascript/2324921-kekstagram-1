@@ -1,7 +1,3 @@
-// import { COMMENTS_PER_PORTION } from './const.js';
-// import { isEscapeKey } from './util.js';
-import { renderThumbnails } from "./thumbnail";
-
 const COMMENTS_PER_PORTION = 5;
 
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
@@ -44,8 +40,8 @@ const renderComments = () => {
   // }
 
   const fragment = document.createDocumentFragment();
-  bigPicture.forEach((social__comment) => {
-    const comment = createComment(social__comment);
+  bigPicture.forEach((socialСomment) => {
+    const comment = createComment(socialСomment);
     fragment.append(comment);
   });
   container.append(fragment);
@@ -88,8 +84,8 @@ const renderPictureDetails = ({ url, likes, description }) => {
 const showBigPicture = (data) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
-  commentsLoader.classList.add('hidden');
-  commentCount.classList.add('hidden');
+  // commentsLoader.classList.add('hidden');
+  // commentCount.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
   renderPictureDetails(data);
