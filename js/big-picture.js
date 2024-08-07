@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 
-// const COMMENTS_PER_PORTION = 5;
+const COMMENTS_PER_PORTION = 5;
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const body = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture');
@@ -13,7 +13,7 @@ const commentList = bigPicture.querySelector('.social__comments');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 
 
-// let commentsShown = 0;
+let commentsShown = 0;
 let comments = [];
 
 const createComments = ({ avatar, name, message }) => {
@@ -27,15 +27,33 @@ const createComments = ({ avatar, name, message }) => {
 };
 
 const renderComments = () => {
+  commentsShown += COMMENTS_PER_PORTION;
   const fragment = document.createDocumentFragment();
-  for (let i = 0; i < comments.length; i++) {
+  for (let i = 0; i < commentsShown; i++) {
     const commentElement = createComments(comments[i]);
     fragment.append(commentElement);
   }
-  // commentList.innerHTML = '';
   commentList.append(fragment);
-  // commentCount.innerHTML = '${commentsShown}'; /** Добавить еще...но не совсем пойму что конкретно и для чего  */
+
+  if (commentsShown >= comments.length) {
+    commentsLoader.classList.add('hidden');
+    commentsShown = comments.length;
+  } else {
+    commentsLoader.classList.remove('hidden');
+  }
+
 };
+
+// const renderComments = () => {
+//   const fragment = document.createDocumentFragment();
+//   for (let i = 0; i < comments.length; i++) {
+//     const commentElement = createComments(comments[i]);
+//     fragment.append(commentElement);
+//   }
+//   // commentList.innerHTML = '';
+//   commentList.append(fragment);
+//   // commentCount.innerHTML = '${commentsShown}'; /** Добавить еще...но не совсем пойму что конкретно и для чего  */
+// };
 
 const hideBigPicture = () => {
   bigPicture.classList.add('hidden');
@@ -65,11 +83,12 @@ const showBigPicture = (data) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
-  commentCount.classList.add('hidden');
+  commentCount.classList.remove('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
   renderPictureDetails(data);
   commentList.innerHTML = '';
+  // commentCount.innerHTML = '';
   comments = data.comments;
   renderComments();
 };
