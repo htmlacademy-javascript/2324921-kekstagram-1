@@ -24,8 +24,10 @@ const COMMENTS_STROKES = [
 const DESCRIPTIONS = [
   'Наконец-то мы на каникулах. Урааа!',
   'Хочется отдохнуть и отвлечься от всех дел и суеты',
+  'Хочется отдохнуть и отвлечься от всех дел и суеты',
+  'Фотограф у нас так себе, хотя у него профессиональный фотик',
   'Фотограф у нас так себе, хотя у него профессиональный фотик',
   'Поиск хорошего фотографа нужен как можно быстрее, иначе мы останемся без красивых фоток и памяти',
 ];
 
-export { NAMES, PICTURE_COUNT, AVATAR_COUNT, LIKE_MIN_COUNT, LIKE_MAX_COUNT, COMMENT_COUNT, COMMENTS_STROKES, DESCRIPTIONS };
+export { NAMES, PICTURE_COUNT, AVATAR_COUNT, LIKE_MIN_COUNT, LIKE_MAX_COUNT, COMMENT_COUNT, COMMENTS_STROKES, DESCRIPTIONS, };
