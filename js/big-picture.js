@@ -43,13 +43,15 @@ const renderComments = () => {
     fragment.append(commentElement);
   }
 
-  commentCount.innerHTML = '';
   commentList.innerHTML = '';
   commentList.append(fragment);
+  commentCount.innerHTML = commentsShown + ' из ' + comments.length + ' комментариев ';
 
   const startingCommentsCount = bigPicture.querySelector('.starting-comments-count');
   const commentsCount = bigPicture.querySelector('.comments-count');
 
+  /* не могу понять как здесь поступить и какая должна быть
+  структура кода (на какое значение менять), чтобы работало все корректно */
   startingCommentsCount.textContent = '';
   commentsCount.textContent = '';
 };
@@ -69,7 +71,6 @@ function onDocumentKeydown(evt) {
 
 const onCancelButtonClick = () => {
   hideBigPicture();
-  // commentsShown();
 };
 
 const renderPictureDetails = ({ url, likes, description }) => {
