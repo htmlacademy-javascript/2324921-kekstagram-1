@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 
-// const COMMENTS_PER_PORTION = 5;
+const COMMENTS_PER_PORTION = 5;
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const body = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture');
@@ -11,9 +11,10 @@ const cancelButton = bigPicture.querySelector('.big-picture__cancel');
 const commentCount = bigPicture.querySelector('.social__comment-count');
 const commentList = bigPicture.querySelector('.social__comments');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
+const startingCommentsCount = bigPicture.querySelector('.starting-comments-count');
+const commentsCount = bigPicture.querySelector('.comments-count');
 
-
-// let commentsShown = 0;
+let commentsShown = 0;
 let comments = [];
 
 const createComments = ({ avatar, name, message }) => {
@@ -27,14 +28,26 @@ const createComments = ({ avatar, name, message }) => {
 };
 
 const renderComments = () => {
+  commentsShown += COMMENTS_PER_PORTION;
+
+  if (commentsShown >= comments.length) {
+    commentsLoader.classList.add('hidden');
+    commentsShown = comments.length;
+  } else {
+    commentsLoader.classList.remove('hidden');
+  }
+
   const fragment = document.createDocumentFragment();
-  for (let i = 0; i < comments.length; i++) {
+
+  for (let i = 0; i < commentsShown; i++) {
     const commentElement = createComments(comments[i]);
     fragment.append(commentElement);
   }
-  // commentList.innerHTML = '';
+
+  commentList.innerHTML = '';
   commentList.append(fragment);
-  // commentCount.innerHTML = '${commentsShown}'; /** Добавить еще...но не совсем пойму что конкретно и для чего  */
+  startingCommentsCount.textContent = commentsShown;
+  commentsCount.textContent = comments.length;
 };
 
 const hideBigPicture = () => {
@@ -65,14 +78,19 @@ const showBigPicture = (data) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
-  commentCount.classList.add('hidden');
+  commentCount.classList.remove('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
   renderPictureDetails(data);
   commentList.innerHTML = '';
   comments = data.comments;
+  commentsShown = 0;
   renderComments();
 };
+
+commentsLoader.addEventListener('click', () => {
+  renderComments();
+});
 
 cancelButton.addEventListener('click', onCancelButtonClick);
 
