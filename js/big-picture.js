@@ -11,7 +11,8 @@ const cancelButton = bigPicture.querySelector('.big-picture__cancel');
 const commentCount = bigPicture.querySelector('.social__comment-count');
 const commentList = bigPicture.querySelector('.social__comments');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
-
+const startingCommentsCount = bigPicture.querySelector('.starting-comments-count');
+const commentsCount = bigPicture.querySelector('.comments-count');
 
 let commentsShown = 0;
 let comments = [];
@@ -45,15 +46,8 @@ const renderComments = () => {
 
   commentList.innerHTML = '';
   commentList.append(fragment);
-  commentCount.innerHTML = commentsShown + ' из ' + comments.length + ' комментариев ';
-
-  const startingCommentsCount = bigPicture.querySelector('.starting-comments-count');
-  const commentsCount = bigPicture.querySelector('.comments-count');
-
-  /* не могу понять как здесь поступить и какая должна быть
-  структура кода (на какое значение менять), чтобы работало все корректно */
-  startingCommentsCount.textContent = '';
-  commentsCount.textContent = '';
+  startingCommentsCount.textContent = commentsShown;
+  commentsCount.textContent = comments.length;
 };
 
 const hideBigPicture = () => {
@@ -89,8 +83,8 @@ const showBigPicture = (data) => {
 
   renderPictureDetails(data);
   commentList.innerHTML = '';
-  commentCount.innerHTML = '';
   comments = data.comments;
+  commentsShown = 0;
   renderComments();
 };
 
