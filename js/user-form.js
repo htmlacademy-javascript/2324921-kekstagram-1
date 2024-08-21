@@ -37,7 +37,7 @@ function onDocumentKeydown(evt) {
     evt.preventDefault();
     hideModal();
   }
-};
+}
 
 const onCancelButtonClick = () => {
   hideModal();
@@ -72,7 +72,7 @@ pristine.addValidator(
 
 // Проверка валидации формы
 const onFormSubmit = (evt) => {
- evt.preventDefault();
+  evt.preventDefault();
   pristine.validate();
 };
 
