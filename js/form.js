@@ -13,7 +13,7 @@ const commentField = document.querySelector('.text__description');
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'fimg-upload__field-wrapper__error'
+  errorTextClass: 'img-upload__field-wrapper--error'
 });
 
 const showModal = () => {
@@ -53,11 +53,11 @@ const onFileFieldChange = () => {
 
 // Проверка валидации хештега по написания и кол-ву символов
 const isValidTag = (tag) => VALID_SYMBOLS.test(tag);
-const hasValidCount = (tags) => tags.lenght <= MAX_HASHTAG_COUNT;
+const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT;
 
 const hasUniqueTags = (tags) => {
   const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
-  return lowerCaseTags.lenght === new Set(lowerCaseTags).size; /**Рассмотреть еще какой-нибудь вариант */
+  return lowerCaseTags.length === new Set(lowerCaseTags).size; /**Рассмотреть еще какой-нибудь вариант */
 };
 
 const validateTags = (value) => {
