@@ -10,6 +10,12 @@ const cancelButton = document.querySelector('#upload-cancel');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 
+const pristine = new Pristine(form, {
+  classTo: 'img-upload__field-wrapper',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextClass: 'fimg-upload__field-wrapper--error'
+});
+
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -17,19 +23,17 @@ const showModal = () => {
 };
 
 const hideModal = () => {
+  form.reset();
+  pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-const pristine = new Pristine(form, {
-  classTo: 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'fimg-upload__field-wrapper--error'
-});
 
 const isTextFieldFocused = () => {
-  document.activeElement === hashtagField || document.activeElement === commentField;
+  document.activeElement === hashtagField ||
+  document.activeElement === commentField;
 };
 
 function onDocumentKeydown(evt) {
@@ -53,14 +57,14 @@ const hasValidCount = (tags) => tags.lenght <= MAX_HASHTAG_COUNT;
 
 const hasUniqueTags = (tags) => {
   const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
-  return lowerCaseTags.lenght === new Set(lowerCaseTags).size;
+  return lowerCaseTags.lenght === new Set(lowerCaseTags).size; /**Рассмотреть еще какой-нибудь вариант */
 };
 
 const validateTags = (value) => {
   const tags = value
     .trim()
     .split(' ')
-    .filter((tag) => tag.trim().length);
+    .filter((tag) => tag.trim().length); /**Рассмотреть еще какой-нибудь вариант */
   return hasValidCount(tags) && hasUniqueTags(tags) && tags.every(isValidTag);
 };
 
