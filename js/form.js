@@ -13,7 +13,7 @@ const commentField = document.querySelector('.text__description');
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'fimg-upload__field-wrapper--error'
+  errorTextClass: 'fimg-upload__field-wrapper__error'
 });
 
 const showModal = () => {
