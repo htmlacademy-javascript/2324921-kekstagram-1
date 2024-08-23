@@ -30,27 +30,7 @@ const hideModal = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-//Тут нужно реализовать более локаничнее
-commentField.addEventListener('focus', () => {
-  document.removeEventListener('keydown', onDocumentKeydown);
-});
-
-commentField.addEventListener('blur', () => {
-  document.addEventListener('keydown', onDocumentKeydown);
-});
-
-hashtagField.addEventListener('focus', () => {
-  document.removeEventListener('keydown', onDocumentKeydown);
-});
-
-hashtagField.addEventListener('blur', () => {
-  document.addEventListener('keydown', onDocumentKeydown);
-});
-
-const isTextFieldFocused = () => {
-  document.activeElement === hashtagField ||
-    document.activeElement === commentField;
-};
+const isTextFieldFocused = () => document.activeElement === hashtagField || document.activeElement === commentField;
 
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !isTextFieldFocused()) {
@@ -73,14 +53,14 @@ const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT;
 
 const hasUniqueTags = (tags) => {
   const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
-  return lowerCaseTags.length === new Set(lowerCaseTags).size; /**Рассмотреть еще какой-нибудь вариант */
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
 const validateTags = (value) => {
   const tags = value
     .trim()
     .split(' ')
-    .filter((tag) => tag.trim().length); /**Рассмотреть еще какой-нибудь вариант */
+    .filter((tag) => tag);
   return hasValidCount(tags) && hasUniqueTags(tags) && tags.every(isValidTag);
 };
 
@@ -92,8 +72,10 @@ pristine.addValidator(
 
 // Проверка валидации формы перед отправкой
 const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+
+  if (!pristine.validate()) {
+    evt.preventDefault();
+  }
 };
 
 fileField.addEventListener('change', onFileFieldChange);
