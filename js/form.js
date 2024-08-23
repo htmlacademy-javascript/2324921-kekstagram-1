@@ -30,25 +30,26 @@ const hideModal = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-// commentField.addEventListener('focus', () => {
-//   document.removeEventListener('keydown', onDocumentKeydown);
-// });
+//Тут нужно реализовать более локаничнее
+commentField.addEventListener('focus', () => {
+  document.removeEventListener('keydown', onDocumentKeydown);
+});
 
-// commentField.addEventListener('blur', () => {
-//   document.addEventListener('keydown', onDocumentKeydown);
-// });
+commentField.addEventListener('blur', () => {
+  document.addEventListener('keydown', onDocumentKeydown);
+});
 
-// hashtagField.addEventListener('focus', () => {
-//   document.removeEventListener('keydown', onDocumentKeydown);
-// });
+hashtagField.addEventListener('focus', () => {
+  document.removeEventListener('keydown', onDocumentKeydown);
+});
 
-// hashtagField.addEventListener('blur', () => {
-//   document.addEventListener('keydown', onDocumentKeydown);
-// });
+hashtagField.addEventListener('blur', () => {
+  document.addEventListener('keydown', onDocumentKeydown);
+});
 
 const isTextFieldFocused = () => {
   document.activeElement === hashtagField ||
-  document.activeElement === commentField;
+    document.activeElement === commentField;
 };
 
 function onDocumentKeydown(evt) {
@@ -89,7 +90,7 @@ pristine.addValidator(
   TAG_ERROR_TEXT
 );
 
-// Проверка валидации формы
+// Проверка валидации формы перед отправкой
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   pristine.validate();
