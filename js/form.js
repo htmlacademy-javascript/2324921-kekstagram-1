@@ -30,6 +30,21 @@ const hideModal = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
+// commentField.addEventListener('focus', () => {
+//   document.removeEventListener('keydown', onDocumentKeydown);
+// });
+
+// commentField.addEventListener('blur', () => {
+//   document.addEventListener('keydown', onDocumentKeydown);
+// });
+
+// hashtagField.addEventListener('focus', () => {
+//   document.removeEventListener('keydown', onDocumentKeydown);
+// });
+
+// hashtagField.addEventListener('blur', () => {
+//   document.addEventListener('keydown', onDocumentKeydown);
+// });
 
 const isTextFieldFocused = () => {
   document.activeElement === hashtagField ||
