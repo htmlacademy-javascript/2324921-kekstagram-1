@@ -55,17 +55,17 @@ let chosenEffect = DEFAULT_EFFECT;
 const imageElement = document.querySelector('.img-upload__preview');
 const effectsElement = document.querySelector('.effects');
 const sliderElement = document.querySelector('.effect-level__slider');
-const sliderContainerElement = document.querySelector('.img-upload__effects'); // Уточнить класс
+const sliderContainerElement = document.querySelector('.img-upload__preview-container');
 const effectLevelElement = document.querySelector('.effect-level__value');
 
 const isDefault = () => chosenEffect === DEFAULT_EFFECT;
 
 const showSlider = () => {
-  // sliderContainerElement.classList.remove('hidden');
+  sliderContainerElement.classList.remove('hidden');
 };
 
 const hideSlider = () => {
-  sliderContainerElement.classList.add('hidden');
+  sliderContainerElement.classList.remove('hidden');
 };
 
 const updateSlider = () => {
@@ -86,11 +86,11 @@ const updateSlider = () => {
 };
 
 const onEffectsChange = (evt) => {
-  if (!evt.target.classList.contains('effects __ radio')) {
+  if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
   chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
-  imageElement.className = `effects __ preview-- ${chosenEffect.name}`;
+  imageElement.className = `effects__preview-- ${chosenEffect.name}`;
   updateSlider();
 };
 
