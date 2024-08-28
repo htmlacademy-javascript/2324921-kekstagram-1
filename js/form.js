@@ -1,3 +1,6 @@
+import { resetScale } from './scale.js';
+import { resetEffects } from './effect.js';
+
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const TAG_ERROR_TEXT = 'Заполненное поле неверно';
@@ -25,6 +28,8 @@ const showModal = () => {
 const hideModal = () => {
   form.reset();
   pristine.reset();
+  resetScale();
+  resetEffects();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
