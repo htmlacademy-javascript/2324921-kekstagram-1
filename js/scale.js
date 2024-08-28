@@ -1,6 +1,6 @@
 import { imageElement } from './util.js';
 
-const SCALE = {
+const Scale = {
   STEP: 25,
   MIN: 25,
   MAX: 100,
@@ -18,23 +18,23 @@ const scaleImage = (value) => {
 
 const onSmallerButtonClick = () => {
   const currentValue = parseInt(scaleInputElement.value, 10);
-  let newValue = currentValue - SCALE.STEP;
-  if (newValue < SCALE.MIN) {
-    newValue = SCALE.MIN;
+  let newValue = currentValue - Scale.STEP;
+  if (newValue < Scale.MIN) {
+    newValue = Scale.MIN;
   }
   scaleImage(newValue);
 };
 
 const onBiggerButtonClick = () => {
   const currentValue = parseInt(scaleInputElement.value, 10);
-  let newValue = currentValue + SCALE.STEP;
-  if (newValue > SCALE.MAX) {
-    newValue = SCALE.MAX;
+  let newValue = currentValue + Scale.STEP;
+  if (newValue > Scale.MAX) {
+    newValue = Scale.MAX;
   }
   scaleImage(newValue);
 };
 
-const resetScale = () => scaleImage(SCALE.DEFAULT);
+const resetScale = () => scaleImage(Scale.DEFAULT);
 
 smallerButtonElement.addEventListener('click', onSmallerButtonClick);
 biggerButtonElement.addEventListener('click', onBiggerButtonClick);
