@@ -1,12 +1,15 @@
-const SCALE_STEP = 25;
-const MIN_SCALE = 25;
-const MAX_SCALE = 100;
-const DEFAULT_SCALE = 100;
+import { imageElement } from './util.js';
+
+const SCALE = {
+  STEP: 25,
+  MIN: 25,
+  MAX: 100,
+  DEFAULT: 100,
+};
 
 const smallerButtonElement = document.querySelector('.scale__control--smaller');
 const biggerButtonElement = document.querySelector('.scale__control--bigger');
 const scaleInputElement = document.querySelector('.scale__control--value');
-const imageElement = document.querySelector('.img-upload__preview img');
 
 const scaleImage = (value) => {
   imageElement.style.transform = `scale(${value / 100})`;
@@ -15,23 +18,23 @@ const scaleImage = (value) => {
 
 const onSmallerButtonClick = () => {
   const currentValue = parseInt(scaleInputElement.value, 10);
-  let newValue = currentValue - SCALE_STEP;
-  if (newValue < MIN_SCALE) {
-    newValue = MIN_SCALE;
+  let newValue = currentValue - SCALE.STEP;
+  if (newValue < SCALE.MIN) {
+    newValue = SCALE.MIN;
   }
   scaleImage(newValue);
 };
 
 const onBiggerButtonClick = () => {
   const currentValue = parseInt(scaleInputElement.value, 10);
-  let newValue = currentValue + SCALE_STEP;
-  if (newValue > MAX_SCALE) {
-    newValue = MAX_SCALE;
+  let newValue = currentValue + SCALE.STEP;
+  if (newValue > SCALE.MAX) {
+    newValue = SCALE.MAX;
   }
   scaleImage(newValue);
 };
 
-const resetScale = () => scaleImage(DEFAULT_SCALE);
+const resetScale = () => scaleImage(SCALE.DEFAULT);
 
 smallerButtonElement.addEventListener('click', onSmallerButtonClick);
 biggerButtonElement.addEventListener('click', onBiggerButtonClick);
