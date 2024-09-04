@@ -1,50 +1,35 @@
-// const getData = (onSuccess) => {
-//   fetch('https://28.javascript.htmlacademy.pro/kekstagram/data')
-//     .then((response) => response.json())
-//     .then((form) => {
-//       onSuccess(form);
-//     });
-// };
+const BASE_URL = 'https://28.javascript.htmlacademy.pro/kekstagram';
 
-// const sendData = (onSuccess, onFail, body) => {
+const Route = {
+  GET_DATA: '/data',
+  SEND_DATA: '/',
+};
 
-//   fetch(
-//     'https://28.javascript.htmlacademy.pro/kekstagram',
-//     {
-//       method: 'POST',
-//       body
-//     },
-//   )
-//     .then((response) => {
-//       if (response.ok) {
-//         onSuccess();
-//       } else {
-//         onFail('Не удалось отправить форму. Попробуйте ещё раз');
-//       }
-//     })
-//     .catch(() => {
-//       onFail('Не удалось отправить форму. Попробуйте ещё раз');
-//     });
-// };
+const Method = {
+  GET: 'GET',
+  POST: 'POST',
+};
 
+const ErrorText = {
+  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
+};
 
-const getData = () => fetch(
-  'https://28.javascript.htmlacademy.pro/kekstagram/data')
-  .then((response) => response.json());
+const load = (route, errorText, method = Method.GET, body = null) =>
+  fetch(`${BASE_URL}${route}`, { method, body })
 
-const sendData = (body) => fetch(
-  'https://28.javascript.htmlacademy.pro/kekstagram',
-  {
-    method: 'POST',
-    body,
-  })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error();
-    }
-  })
-  .catch(() => {
-    throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
-  });
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error();
+      }
+      return response.json();
+    })
+    .catch(() => {
+      throw new Error(errorText);
+    });
+
+const getData = () => load(Route.getData, ErrorText.GET_DATA);
+
+const sendData = (body) => load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);
 
 export { getData, sendData };
