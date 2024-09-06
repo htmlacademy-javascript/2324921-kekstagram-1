@@ -1,7 +1,7 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
-import { sendData } from './api.js';
-import { showAlert } from './util.js';
+// import { sendData } from './api.js';
+// import { showAlert } from './util.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -77,31 +77,25 @@ pristine.addValidator(
   TAG_ERROR_TEXT
 );
 
-// Проверка валидации формы перед отправкой
-const onFormSubmit = (evt) => {
+// const blockSubmitButton () => {
+//   submitButton.disabled = false;
+//   submitButton.textContent = SubmitButtonText.IDOL;
+// };
 
-  if (!pristine.validate()) {
-    evt.preventDefault();
-  }
-};
-
-const setUserFormSubmit = (onSuccess) => {
-  form.addEventListener('submit', (evt) => {
+const setOnFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
     if (isValid) {
-      sendData(new FormData(evt.target))
-        .then(onSuccess)
-        .catch((err) => {
-          showAlert(err.message);
-        });
+      // blockSubmitButton();
+      await onSuccess(new FormData(form))
+      // unblockSubmitButton();
     }
   });
-};
+}
 
 fileField.addEventListener('change', onFileFieldChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
-form.addEventListener('submit', onFormSubmit);
 
-export { setUserFormSubmit };
+export { setOnFormSubmit, hideModal };

@@ -1,12 +1,25 @@
-import { getPictures } from './mocks/photo.js';
+// import { getPictures } from './mocks/photo.js';
 import { renderGallery } from './gallery.js';
-import { setUserFormSubmit } from './form.js';
-import { hideModal } from './form.js';
-import { getData } from './api.js';
+import { setOnFormSubmit, hideModal } from './form.js';
+import { showSuccesMessage, showErrorMessage } from './message.js';
+import { getData, sendData } from './api.js';
+import { showAlert } from './util.js';
 import './form.js';
+// import { showBigPicture } from './big-picture.js';
 
-getData(Form);
+setOnFormSubmit(async (data) => {
+  try {
+    await sendData(data);
+    hideModal();
+    showSuccesMessage();
+  } catch {
+    showErrorMessage();
+  }
+});
 
-setUserFormSubmit(hideModal);
-
-renderGallery(getPictures());
+try {
+  const data = await getData();
+  renderGallery(data);
+} catch(err) {
+  showAlert(err.message)
+}
