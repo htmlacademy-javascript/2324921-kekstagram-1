@@ -77,10 +77,10 @@ pristine.addValidator(
   TAG_ERROR_TEXT
 );
 
-// const blockSubmitButton () => {
-//   submitButton.disabled = false;
-//   submitButton.textContent = SubmitButtonText.IDOL;
-// };
+const blockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDOL;
+};
 
 const setOnFormSubmit = (onSuccess) => {
   form.addEventListener('submit', async (evt) => {
@@ -88,9 +88,9 @@ const setOnFormSubmit = (onSuccess) => {
 
     const isValid = pristine.validate();
     if (isValid) {
-      // blockSubmitButton();
+      blockSubmitButton();
       await onSuccess(new FormData(form))
-      // unblockSubmitButton();
+      unblockSubmitButton();
     }
   });
 }

@@ -1,9 +1,16 @@
-const showSuccesMessage = document.querySelector('.success__inner');
-const showErrorMessage = document.querySelector('.error__inner');
-const onSuccesButton = showSuccesMessage.querySelector('.success__button');
-const onErrorButton = showSuccesMessage.querySelector('.error__button');
+import { isEscapeKey } from './util.js';
 
-onSuccesButton.addEventListener('click', showSuccesMessage);
-onErrorButton.addEventListener('click', showErrorMessage);
+const succesButton = document.querySelector('.success__button');
+const errorButton = document.querySelector('.error__button');
+
+const showSuccesMessage = () => {
+  isEscapeKey();
+};
+const showErrorMessage = () => {
+
+};
+
+succesButton.addEventListener('click', showSuccesMessage);
+errorButton.addEventListener('click', showErrorMessage);
 
 export { showSuccesMessage, showErrorMessage };
