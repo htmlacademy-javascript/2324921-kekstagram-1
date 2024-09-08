@@ -1,6 +1,6 @@
 import { renderGallery } from './gallery.js';
 import { setOnFormSubmit, hideModal } from './form.js';
-// import { showSuccesMessage, showErrorMessage } from './message.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
 import { getData, sendData } from './api.js';
 import { showAlert } from './util.js';
 import './form.js';
@@ -9,9 +9,9 @@ setOnFormSubmit(async (data) => {
   try {
     await sendData(data);
     hideModal();
-    // showSuccesMessage();
+    showSuccessMessage();
   } catch {
-    // showErrorMessage();
+    showErrorMessage();
   }
 });
 

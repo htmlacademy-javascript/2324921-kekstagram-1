@@ -1,7 +1,7 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
-// import { sendData } from './api.js';
-// import { showAlert } from './util.js';
+import { showSuccessMessage } from './message.js';
+
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -10,6 +10,7 @@ const TAG_ERROR_TEXT = 'Заполненное поле неверно';
 const form = document.querySelector('.img-upload__form');
 const fileField = document.querySelector('#upload-file');
 const overlay = form.querySelector('.img-upload__overlay');
+const submitButton = form.querySelector('.img-upload__submit');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
 const hashtagField = document.querySelector('.text__hashtags');
@@ -79,8 +80,13 @@ pristine.addValidator(
 
 const blockSubmitButton = () => {
   submitButton.disabled = false;
-  submitButton.textContent = SubmitButtonText.IDOL;
+  submitButton.textContent = submitButtonText.IDOL;
 };
+
+const unblockSubmitButton = () => {
+  showSuccessMessage();
+};
+submitButton.addEventListener('click', unblockSubmitButton);
 
 const setOnFormSubmit = (onSuccess) => {
   form.addEventListener('submit', async (evt) => {

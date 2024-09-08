@@ -1,16 +1,34 @@
 import { isEscapeKey } from './util.js';
 
-const succesButton = document.querySelector('.success__button');
+const successTemplate = document.querySelector('#success');
+const fragment = document.createDocumentFragment();
+
+// const successInner = document.querySelector('.success__inner');
+const successButton = document.querySelector('.success__button');
 const errorButton = document.querySelector('.error__button');
 
-const showSuccesMessage = () => {
-  isEscapeKey();
+const showSuccessMessage = () => {
+  const successMessage = successTemplate.cloneNode(true);
+  successButton.addEventListener('click', showSuccessMessage);
+  fragment.appendChild(successMessage);
 };
+
+const hideSuccessMessage = () => {
+  // body.classList.add('modal-open');
+  document.removeEventListener('keydown', onDocumentKeydown);
+};
+
 const showErrorMessage = () => {
-
+  const errorMessage = successTemplate.cloneNode(true);
+  errorButton.addEventListener('click', showErrorMessage);
+  fragment.appendChild(errorMessage);
 };
 
-succesButton.addEventListener('click', showSuccesMessage);
-errorButton.addEventListener('click', showErrorMessage);
+function onDocumentKeydown(evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    hideSuccessMessage();
+  }
+}
 
-export { showSuccesMessage, showErrorMessage };
+export { showSuccessMessage, showErrorMessage };
