@@ -18,6 +18,6 @@ setOnFormSubmit(async (data) => {
 try {
   const data = await getData();
   renderGallery(data);
-} catch(err) {
-  showAlert(err.message)
+} catch (err) {
+  showAlert(err.message);
 }

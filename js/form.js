@@ -1,6 +1,8 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
-import { showSuccessMessage } from './message.js';
+import { showAlert } from './util.js';
+import { sendData } from './api.js';
+// import { showSuccessMessage, showErrorMessage } from './message.js';
 
 
 const MAX_HASHTAG_COUNT = 5;
@@ -10,7 +12,7 @@ const TAG_ERROR_TEXT = 'Заполненное поле неверно';
 const form = document.querySelector('.img-upload__form');
 const fileField = document.querySelector('#upload-file');
 const overlay = form.querySelector('.img-upload__overlay');
-const submitButton = form.querySelector('.img-upload__submit');
+const submitButton = form.querySelector('#upload-submit');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
 const hashtagField = document.querySelector('.text__hashtags');
@@ -78,15 +80,20 @@ pristine.addValidator(
   TAG_ERROR_TEXT
 );
 
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Сохраняю...'
+};
+
 const blockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = submitButtonText.IDOL;
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
 };
 
 const unblockSubmitButton = () => {
-  showSuccessMessage();
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
 };
-submitButton.addEventListener('click', unblockSubmitButton);
 
 const setOnFormSubmit = (onSuccess) => {
   form.addEventListener('submit', async (evt) => {
@@ -95,12 +102,19 @@ const setOnFormSubmit = (onSuccess) => {
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      await onSuccess(new FormData(form))
-      unblockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(onSuccess)
+        .catch(
+          (err) => {
+            showAlert(err.message);
+          }
+        )
+        .finally(unblockSubmitButton);
     }
   });
-}
+};
 
+// submitButton.addEventListener('click', showSuccessMessage);
 fileField.addEventListener('change', onFileFieldChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 
