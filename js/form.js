@@ -1,9 +1,5 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
-import { showAlert } from './util.js';
-import { sendData } from './api.js';
-// import { showSuccessMessage, showErrorMessage } from './message.js';
-
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -82,7 +78,7 @@ pristine.addValidator(
 
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
-  SENDING: 'Сохраняю...'
+  SENDING: 'Загружаем...'
 };
 
 const blockSubmitButton = () => {
@@ -95,26 +91,19 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.IDLE;
 };
 
-const setOnFormSubmit = (onSuccess) => {
+const setOnFormSubmit = (cb) => {
   form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      sendData(new FormData(evt.target))
-        .then(onSuccess)
-        .catch(
-          (err) => {
-            showAlert(err.message);
-          }
-        )
-        .finally(unblockSubmitButton);
+      await cb(new FormData(evt.target))
+      unblockSubmitButton();
     }
   });
 };
 
-// submitButton.addEventListener('click', showSuccessMessage);
 fileField.addEventListener('change', onFileFieldChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
 

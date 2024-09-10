@@ -30,7 +30,7 @@ const EFFECTS = [
     style: 'invert',
     min: 0,
     max: 100,
-    step: 0.1,
+    step: 1,
     unit: '%',
   },
   {
@@ -91,7 +91,7 @@ const onEffectsChange = (evt) => {
     return;
   }
   chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
-  imageElement.className = `effects__preview-- ${chosenEffect.name}`;
+  imageElement.className = `effects__preview--${chosenEffect.name}`;
   updateSlider();
 };
 

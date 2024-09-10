@@ -8,7 +8,7 @@ const getRandomInteger = (a, b) => {
 const ALERT_SHOW_TIME = 5000;
 
 // Эффекты и масштабирование для картинки
-const imageElement = document.querySelector('.img-upload__preview');
+const imageElement = document.querySelector('.img-upload__preview img');
 
 // Возвращает случайный элемент из массива
 const getRandomArrayElements = (array) => array[getRandomInteger(0, array.length - 1)];
