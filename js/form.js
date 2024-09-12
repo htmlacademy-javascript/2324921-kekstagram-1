@@ -1,6 +1,5 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
-import { showErrorMessage } from './message.js';
 import { isEscapeKey } from './util.js';
 
 const MAX_HASHTAG_COUNT = 5;
@@ -40,19 +39,12 @@ const hideModal = () => {
 
 const isTextFieldFocused = () => document.activeElement === hashtagField || document.activeElement === commentField;
 
-// в onDocumentKeydown нужно добавить проверку что в DOM сейчас нет элемента с классом error,
-// те если у нас отображается модалка с ошибкой, то при нажатии на Esc закроется только она. Форма останется
 function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt) && !isTextFieldFocused()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !document.querySelector('.error')) {
     evt.preventDefault();
     hideModal();
-    if (isEscapeKey(evt) && !document.querySelector('.error')) {
-      hideMessage();
-    }
-    showModal();
   }
 }
-
 
 const onCancelButtonClick = () => {
   hideModal();
