@@ -1,5 +1,6 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
+import { isEscapeKey } from './util.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -39,7 +40,7 @@ const hideModal = () => {
 const isTextFieldFocused = () => document.activeElement === hashtagField || document.activeElement === commentField;
 
 function onDocumentKeydown(evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !document.querySelector('.error')) {
     evt.preventDefault();
     hideModal();
   }
@@ -98,7 +99,7 @@ const setOnFormSubmit = (cb) => {
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      await cb(new FormData(evt.target))
+      await cb(new FormData(evt.target));
       unblockSubmitButton();
     }
   });
