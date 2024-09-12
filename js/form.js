@@ -1,5 +1,6 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
+import { isEscapeKey } from './util.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -8,6 +9,7 @@ const TAG_ERROR_TEXT = 'Заполненное поле неверно';
 const form = document.querySelector('.img-upload__form');
 const fileField = document.querySelector('#upload-file');
 const overlay = form.querySelector('.img-upload__overlay');
+const submitButton = form.querySelector('#upload-submit');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
 const hashtagField = document.querySelector('.text__hashtags');
@@ -38,7 +40,7 @@ const hideModal = () => {
 const isTextFieldFocused = () => document.activeElement === hashtagField || document.activeElement === commentField;
 
 function onDocumentKeydown(evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !document.querySelector('.error')) {
     evt.preventDefault();
     hideModal();
   }
@@ -75,14 +77,35 @@ pristine.addValidator(
   TAG_ERROR_TEXT
 );
 
-// Проверка валидации формы перед отправкой
-const onFormSubmit = (evt) => {
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Загружаем...'
+};
 
-  if (!pristine.validate()) {
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const setOnFormSubmit = (cb) => {
+  form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
-  }
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      await cb(new FormData(evt.target));
+      unblockSubmitButton();
+    }
+  });
 };
 
 fileField.addEventListener('change', onFileFieldChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
-form.addEventListener('submit', onFormSubmit);
+
+export { setOnFormSubmit, hideModal };
