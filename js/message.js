@@ -9,7 +9,7 @@ const hideMessage = () => {
 };
 
 const showSuccessMessage = () => {
-  const successMessage = successTemplate.cloneNode(true);
+  // const successMessage = successTemplate.cloneNode(true);
   successMessage.querySelector('.success__button').addEventListener('click', () => {
     hideMessage();
   });

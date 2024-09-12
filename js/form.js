@@ -1,5 +1,7 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
+import { showErrorMessage } from './message.js';
+import { isEscapeKey } from './util.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -38,12 +40,19 @@ const hideModal = () => {
 
 const isTextFieldFocused = () => document.activeElement === hashtagField || document.activeElement === commentField;
 
+// в onDocumentKeydown нужно добавить проверку что в DOM сейчас нет элемента с классом error,
+// те если у нас отображается модалка с ошибкой, то при нажатии на Esc закроется только она. Форма останется
 function onDocumentKeydown(evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused()) {
     evt.preventDefault();
     hideModal();
+    if (isEscapeKey(evt) && !document.querySelector('.error')) {
+      hideMessage();
+    }
+    showModal();
   }
 }
+
 
 const onCancelButtonClick = () => {
   hideModal();
@@ -98,7 +107,7 @@ const setOnFormSubmit = (cb) => {
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      await cb(new FormData(evt.target))
+      await cb(new FormData(evt.target));
       unblockSubmitButton();
     }
   });
