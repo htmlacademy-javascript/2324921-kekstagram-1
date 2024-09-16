@@ -4,6 +4,7 @@ import { showSuccessMessage, showErrorMessage } from './message.js';
 import { getData, sendData } from './api.js';
 import { showAlert, debounce } from './util.js';
 import './form.js';
+import './choose-picture.js';
 import { init, getFilteredPictures } from './filter.js';
 
 setOnFormSubmit(async (data) => {
