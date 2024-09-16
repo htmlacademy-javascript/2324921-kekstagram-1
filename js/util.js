@@ -38,6 +38,7 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+// Функция  для устранения дребезга:
 function debounce(callback, timeoutDelay = 500) {
 
   let timeoutId;
@@ -48,19 +49,20 @@ function debounce(callback, timeoutDelay = 500) {
   };
 }
 
-// function throttle(callback, delayBetweenFrames) {
+// Функция  для пропуска кадров:
+function throttle(callback, delayBetweenFrames) {
 
-//   let lastTime = 0;
+  let lastTime = 0;
 
-//   return (...rest) => {
+  return (...rest) => {
 
-//     const now = new Date();
+    const now = new Date();
 
-//     if (now - lastTime >= delayBetweenFrames) {
-//       callback.apply(this, rest);
-//       lastTime = now;
-//     }
-//   };
-// }
+    if (now - lastTime >= delayBetweenFrames) {
+      callback.apply(this, rest);
+      lastTime = now;
+    }
+  };
+}
 
-export { getRandomInteger, getRandomArrayElements, isEscapeKey, imageElement, showAlert, debounce };
+export { getRandomInteger, getRandomArrayElements, isEscapeKey, imageElement, showAlert, debounce, throttle };
