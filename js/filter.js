@@ -51,4 +51,4 @@ const init = (loadedPictures, callback) => {
   setOnFilterClick(callback);
 };
 
-export { init, getFilteredPictures };
+export { init };
