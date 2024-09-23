@@ -3,9 +3,9 @@ import { setOnFormSubmit, hideModal } from './form.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 import { getData, sendData } from './api.js';
 import { showAlert, debounce } from './util.js';
-import './form.js';
-import './choose-picture.js';
 import { init } from './filter.js';
+import './form.js';
+import './chooser-picture.js';
 
 setOnFormSubmit(async (data) => {
   try {

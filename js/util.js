@@ -7,16 +7,12 @@ const getRandomInteger = (a, b) => {
 
 const ALERT_SHOW_TIME = 5000;
 
-// Эффекты и масштабирование для картинки
 const imageElement = document.querySelector('.img-upload__preview img');
 
-// Возвращает случайный элемент из массива
 const getRandomArrayElements = (array) => array[getRandomInteger(0, array.length - 1)];
 
-//Закрывает модальное окно при нажатии на клавишу "Esc"
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-// Сообщение о неудачной отправке формы
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
@@ -38,7 +34,6 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-// Функция  для устранения дребезга:
 function debounce(callback, timeoutDelay = 500) {
 
   let timeoutId;
