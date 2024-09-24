@@ -1,15 +1,6 @@
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
 const ALERT_SHOW_TIME = 5000;
 
 const imageElement = document.querySelector('.img-upload__preview img');
-
-const getRandomArrayElements = (array) => array[getRandomInteger(0, array.length - 1)];
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
@@ -44,4 +35,4 @@ function debounce(callback, timeoutDelay = 500) {
   };
 }
 
-export { getRandomInteger, getRandomArrayElements, isEscapeKey, imageElement, showAlert, debounce };
+export {  isEscapeKey, imageElement, showAlert, debounce };
