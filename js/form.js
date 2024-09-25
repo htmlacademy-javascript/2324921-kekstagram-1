@@ -6,38 +6,38 @@ const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const TAG_ERROR_TEXT = 'Заполненное поле неверно';
 
-const form = document.querySelector('.img-upload__form');
-const fileField = document.querySelector('#upload-file');
-const overlay = form.querySelector('.img-upload__overlay');
-const submitButton = form.querySelector('#upload-submit');
-const body = document.querySelector('body');
-const cancelButton = document.querySelector('#upload-cancel');
-const hashtagField = document.querySelector('.text__hashtags');
-const commentField = document.querySelector('.text__description');
+const formElement = document.querySelector('.img-upload__form');
+const fileFieldElement = document.querySelector('#upload-file');
+const overlayElement = formElement.querySelector('.img-upload__overlay');
+const submitButtonElement = formElement.querySelector('#upload-submit');
+const bodyElement = document.body;
+const cancelButtonElement = document.querySelector('#upload-cancel');
+const hashtagFieldElement = document.querySelector('.text__hashtags');
+const commentFieldElement = document.querySelector('.text__description');
 
-const pristine = new Pristine(form, {
+const pristine = new Pristine(formElement, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 
 const showModal = () => {
-  overlay.classList.remove('hidden');
-  body.classList.add('modal-open');
+  overlayElement.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const hideModal = () => {
-  form.reset();
+  formElement.reset();
   pristine.reset();
   resetScale();
   resetEffects();
-  overlay.classList.add('hidden');
-  body.classList.remove('modal-open');
+  overlayElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-const isTextFieldFocused = () => document.activeElement === hashtagField || document.activeElement === commentField;
+const isTextFieldFocused = () => document.activeElement === hashtagFieldElement || document.activeElement === commentFieldElement;
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !isTextFieldFocused() && !document.querySelector('.error')) {
@@ -72,7 +72,7 @@ const validateTags = (value) => {
 };
 
 pristine.addValidator(
-  hashtagField,
+  hashtagFieldElement,
   validateTags,
   TAG_ERROR_TEXT
 );
@@ -83,17 +83,17 @@ const SubmitButtonText = {
 };
 
 const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = SubmitButtonText.SENDING;
+  submitButtonElement.disabled = true;
+  submitButtonElement.textContent = SubmitButtonText.SENDING;
 };
 
 const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = SubmitButtonText.IDLE;
+  submitButtonElement.disabled = false;
+  submitButtonElement.textContent = SubmitButtonText.IDLE;
 };
 
 const setOnFormSubmit = (cb) => {
-  form.addEventListener('submit', async (evt) => {
+  formElement.addEventListener('submit', async (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
@@ -105,7 +105,7 @@ const setOnFormSubmit = (cb) => {
   });
 };
 
-fileField.addEventListener('change', onFileFieldChange);
-cancelButton.addEventListener('click', onCancelButtonClick);
+fileFieldElement.addEventListener('change', onFileFieldChange);
+cancelButtonElement.addEventListener('click', onCancelButtonClick);
 
 export { setOnFormSubmit, hideModal };

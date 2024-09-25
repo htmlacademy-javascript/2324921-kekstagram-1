@@ -8,20 +8,6 @@ const hideMessage = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-const showSuccessMessage = () => {
-  const successMessage = successTemplate.cloneNode(true);
-  successMessage.querySelector('.success__button').addEventListener('click', () => {
-    hideMessage();
-  });
-  successMessage.addEventListener('click', (evt) => {
-    if (evt.target === successMessage) {
-      hideMessage();
-    }
-  });
-  document.body.appendChild(successMessage);
-  document.addEventListener('keydown', onDocumentKeydown);
-};
-
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -29,19 +15,24 @@ function onDocumentKeydown(evt) {
   }
 }
 
-const showErrorMessage = () => {
-  const errorMessage = errorTemplate.cloneNode(true);
-  errorMessage.querySelector('.error__button').addEventListener('click', () => {
+const messageTypeToTemplate = {
+  success: successTemplate,
+  error: errorTemplate,
+};
+
+const showMessage = (type) => {
+  const messageElement = messageTypeToTemplate[type].cloneNode(true);
+  messageElement.querySelector(`.${type}__button`);
+  messageElement.addEventListener('click', () => {
     hideMessage();
   });
-
-  errorMessage.addEventListener('click', (evt) => {
-    if (evt.target === errorMessage) {
+  messageElement.addEventListener('click', (evt) => {
+    if (evt.target === messageElement) {
       hideMessage();
     }
   });
-  document.body.appendChild(errorMessage);
+  document.body.appendChild(messageElement);
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-export { showSuccessMessage, showErrorMessage };
+export { showMessage };
