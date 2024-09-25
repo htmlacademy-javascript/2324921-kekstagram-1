@@ -18,13 +18,13 @@ let commentsShown = 0;
 let comments = [];
 
 const createComments = ({ avatar, name, message }) => {
-  const comment = commentTemplate.cloneNode(true);
-  const commentPicture = comment.querySelector('.social__picture');
-  commentPicture.src = avatar;
-  commentPicture.alt = name;
-  comment.querySelector('.social__text').textContent = message;
+  const commentElement = commentTemplate.cloneNode(true);
+  const commentPictureElement = commentElement.querySelector('.social__picture');
+  commentPictureElement.src = avatar;
+  commentPictureElement.alt = name;
+  commentElement.querySelector('.social__text').textContent = message;
 
-  return comment;
+  return commentElement;
 };
 
 const renderComments = () => {
@@ -63,7 +63,7 @@ function onDocumentKeydown(evt) {
   }
 }
 
-const onCancelButtonClick = () => {
+const onCancelButtonClickElement = () => {
   hideBigPicture();
 };
 
@@ -92,6 +92,6 @@ commentsLoaderElement.addEventListener('click', () => {
   renderComments();
 });
 
-cancelButtonElement.addEventListener('click', onCancelButtonClick);
+cancelButtonElement.addEventListener('click', onCancelButtonClickElement);
 
 export { showBigPicture };

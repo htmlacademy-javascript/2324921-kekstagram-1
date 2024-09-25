@@ -3,6 +3,11 @@ import { isEscapeKey } from './util.js';
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
+const messageTypeToTemplate = {
+  success: successTemplate,
+  error: errorTemplate,
+};
+
 const hideMessage = () => {
   document.querySelector('.message').remove();
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -15,15 +20,10 @@ function onDocumentKeydown(evt) {
   }
 }
 
-const messageTypeToTemplate = {
-  success: successTemplate,
-  error: errorTemplate,
-};
-
 const showMessage = (type) => {
   const messageElement = messageTypeToTemplate[type].cloneNode(true);
-  messageElement.querySelector(`.${type}__button`);
-  messageElement.addEventListener('click', () => {
+  const buttonElement = messageElement.querySelector(`.${type}__button`);
+  buttonElement.addEventListener('click', () => {
     hideMessage();
   });
   messageElement.addEventListener('click', (evt) => {

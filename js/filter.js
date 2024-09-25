@@ -25,22 +25,22 @@ const getFilteredPictures = () => {
   }
 };
 
-const setOnFilterClick = (callback) => {
+const setOnFilterClickElement = (callback) => {
   filterElement.addEventListener('click', (evt) => {
     if (!evt.target.classList.contains('img-filters__button')) {
       return;
     }
 
-    const clickedButton = evt.target;
-    if (clickedButton.id === currentFilter) {
+    const clickedButtonElement = evt.target;
+    if (clickedButtonElement.id === currentFilter) {
       return;
     }
 
     filterElement
       .querySelector('.img-filters__button--active')
       .classList.remove('img-filters__button--active');
-    clickedButton.classList.add('img-filters__button--active');
-    currentFilter = clickedButton.id;
+    clickedButtonElement.classList.add('img-filters__button--active');
+    currentFilter = clickedButtonElement.id;
     callback(getFilteredPictures());
   });
 };
@@ -48,7 +48,7 @@ const setOnFilterClick = (callback) => {
 const init = (loadedPictures, callback) => {
   filterElement.classList.remove('img-filters--inactive');
   pictures = [...loadedPictures];
-  setOnFilterClick(callback);
+  setOnFilterClickElement(callback);
 };
 
 export { init };
