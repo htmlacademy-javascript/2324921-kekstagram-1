@@ -63,7 +63,7 @@ function onDocumentKeydown(evt) {
   }
 }
 
-const onCancelButtonClickElement = () => {
+const onCancelButtonClick = () => {
   hideBigPicture();
 };
 
@@ -92,6 +92,6 @@ commentsLoaderElement.addEventListener('click', () => {
   renderComments();
 });
 
-cancelButtonElement.addEventListener('click', onCancelButtonClickElement);
+cancelButtonElement.addEventListener('click', onCancelButtonClick);
 
 export { showBigPicture };
