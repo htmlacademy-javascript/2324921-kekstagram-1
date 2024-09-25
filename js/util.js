@@ -35,4 +35,4 @@ function debounce(callback, timeoutDelay = 500) {
   };
 }
 
-export {  isEscapeKey, imageElement, showAlert, debounce };
+export { isEscapeKey, imageElement, showAlert, debounce };
